@@ -1,0 +1,213 @@
+<div class="roles-container">
+  <div class="main-container-title">
+    <div class="title">
+      <h4>Roles</h4>
+      <p>All the roles are configured here</p>
+    </div>
+    <div class="buttons">
+      <button class="add-employee-button" onclick="addrolepage()">
+        <i class="bx bx-plus"></i>
+        <span class="nav-item-text">Add ROLE</span>
+      </button>
+    </div>
+  </div>
+  <div class="filters-container">
+    <div class="filter-content">
+      <h4>Filters</h4>
+      <i class="bx bx-filter"></i>
+      <select name="Department" id="Department">
+        <option value="Department">Department</option>
+        <option value="Product Engineering">Product Engineering</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Finance">Finance</option>
+      </select>
+      <select name="location" id="location">
+        <option value="">Location</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="New York">New York</option>
+        <option value="London">London</option>
+      </select>
+    </div>
+    <div class="filters-buttons">
+      <button class="reset-button white-red-button">Reset</button>
+      <button class="apply-button red-white-button">Apply</button>
+    </div>
+  </div>
+  <div class="roles">
+    <!-- there will be total 6 cards ,3 in each row,  each card have two columns, first column text-align left and second column text-align right,-->
+    <div class="role-card-container">
+      <div class="role-card-row">
+        <div class="role-card">
+          <div class="role-card-column-left">
+            <div class="role-card-title">
+              <h4>Customer Service Manager</h4>
+            </div>
+            <div class="role-card-content">
+              <img src="assets/Horizontal nav/Employees.svg" alt="" />
+              Department <br />
+              <img src="assets/location-pin-alt-1_svgrepo.com.svg" alt="" />
+              Location <br />
+              <span>Total Employees</span>
+            </div>
+          </div>
+          <div class="role-card-column-right">
+            <div class="role-card-title">
+              <img src="assets/edit.svg" alt="" />
+            </div>
+            <div class="role-card-content">
+              <p>IT</p>
+              <p>Hyderabad</p>
+              <p>+43</p>
+            </div>
+          </div>
+          <div class="role-card-button" onclick="RoleDetails()">
+            View all Employees
+            <span><img src="assets/Vector.svg" alt="" /></span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-column-left">
+            <div class="role-card-title">
+              <h4>Ux Designer</h4>
+            </div>
+            <div class="role-card-content">
+              <img src="assets/Horizontal nav/Employees.svg" alt="" />
+              Department <br />
+              <img src="assets/location-pin-alt-1_svgrepo.com.svg" alt="" />
+              Location <br />
+              <span>Total Employees</span>
+            </div>
+          </div>
+          <div class="role-card-column-right">
+            <div class="role-card-title">
+              <img src="assets/edit.svg" alt="" />
+            </div>
+            <div class="role-card-content">
+              <p>Product Engg.</p>
+              <p>Hyderabad</p>
+              <p>+43</p>
+            </div>
+          </div>
+          <div class="role-card-button" onclick="RoleDetails()">
+            View all Employees
+            <span><img src="assets/Vector.svg" alt="" /></span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-column-left">
+            <div class="role-card-title">
+              <h4>Asistant Backend Developer</h4>
+            </div>
+            <div class="role-card-content">
+              <img src="assets/Horizontal nav/Employees.svg" alt="" />
+              Department <br />
+              <img src="assets/location-pin-alt-1_svgrepo.com.svg" alt="" />
+              Location <br />
+              <span>Total Employees</span>
+            </div>
+          </div>
+          <div class="role-card-column-right">
+            <div class="role-card-title">
+              <img src="assets/edit.svg" alt="" />
+            </div>
+            <div class="role-card-content">
+              <p>UI/UX</p>
+              <p>Hyderabad</p>
+              <p>+43</p>
+            </div>
+          </div>
+          <div class="role-card-button" onclick="RoleDetails()">
+            View all Employees
+            <span><img src="assets/Vector.svg" alt="" /></span>
+          </div>
+        </div>
+      </div>
+      <div class="role-card-row">
+        <div class="role-card">
+          <div class="role-card-column-left">
+            <div class="role-card-title">
+              <h4>Human Resource Manager</h4>
+            </div>
+            <div class="role-card-content">
+              <img src="assets/Horizontal nav/Employees.svg" alt="" />
+              Department <br />
+              <img src="assets/location-pin-alt-1_svgrepo.com.svg" alt="" />
+              Location <br />
+              <span>Total Employees</span>
+            </div>
+          </div>
+          <div class="role-card-column-right">
+            <div class="role-card-title">
+              <img src="assets/edit.svg" alt="" />
+            </div>
+            <div class="role-card-content">
+              <p>IT</p>
+              <p>Hyderabad</p>
+              <p>+43</p>
+            </div>
+          </div>
+          <div class="role-card-button" onclick="RoleDetails()">
+            View all Employees
+            <span><img src="assets/Vector.svg" alt="" /></span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-column-left">
+            <div class="role-card-title">
+              <h4>Fornt End Developer</h4>
+            </div>
+            <div class="role-card-content">
+              <img src="assets/Horizontal nav/Employees.svg" alt="" />
+              Department <br />
+              <img src="assets/location-pin-alt-1_svgrepo.com.svg" alt="" />
+              Location <br />
+              <span>Total Employees</span>
+            </div>
+          </div>
+          <div class="role-card-column-right">
+            <div class="role-card-title">
+              <img src="assets/edit.svg" alt="" />
+            </div>
+            <div class="role-card-content">
+              <p>Product Engg.</p>
+              <p>Hyderabad</p>
+              <p>+43</p>
+            </div>
+          </div>
+          <div class="role-card-button" onclick="RoleDetails()">
+            View all Employees
+            <span><img src="assets/Vector.svg" alt="" /></span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-column-left">
+            <div class="role-card-title">
+              <h4>Senior Developer</h4>
+            </div>
+            <div class="role-card-content">
+              <img src="assets/Horizontal nav/Employees.svg" alt="" />
+              Department <br />
+              <img src="assets/location-pin-alt-1_svgrepo.com.svg" alt="" />
+              Location <br />
+              <span>Total Employees</span>
+            </div>
+          </div>
+          <div class="role-card-column-right">
+            <div class="role-card-title">
+              <img src="assets/edit.svg" alt="" />
+            </div>
+            <div class="role-card-content">
+              <p>UIUX</p>
+              <p>Hyderabad</p>
+              <p>+43</p>
+            </div>
+          </div>
+          <div class="role-card-button" onclick="RoleDetails()">
+            View all Employees
+            <span><img src="assets/Vector.svg" alt="" /></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

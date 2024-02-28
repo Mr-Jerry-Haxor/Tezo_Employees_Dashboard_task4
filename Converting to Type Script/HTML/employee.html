@@ -1,0 +1,120 @@
+<div class="main-container-title">
+  <div class="title">
+    <h4>Employees</h4>
+    <p>
+      Find all of your company's employee accounts and their associated roles.
+    </p>
+  </div>
+  <div class="buttons">
+    <button class="export-button" id="export_options" onclick="export_options()">
+      <i class="bx bx-export"></i>
+      <span class="nav-item-text">Export</span>
+    </button>
+    <div class="export-options" style="display: none;">
+      <button id="export_to_xlsx" onclick="download_table_as_xlsx('employees-table')" >Export as XLSX</button>
+      <button id="export_to_csv"  onclick="download_table_as_csv('employees-table')">Export as CSV</button>
+    </div>
+    <button class="add-employee-button" onclick="addemployeepage()">
+      <i class="bx bx-plus"></i>
+      <span class="nav-item-text">Add Employees</span>
+    </button>
+  </div>
+</div>
+<div class="table-filters">
+  <ul class="table-filters-list">
+    <li class="table-filters-icon"    onclick="filterTableByFirstLettersReset()"><img src="assets/Interface/filter.svg" alt="FilterByLetter" id="table-filters-icon"/></li>
+    <li><button type="button" id="filter-A">A</button></li>
+    <li><button type="button" id="filter-B">B</button></li>
+    <li><button type="button" id="filter-C">C</button></li>
+    <li><button type="button" id="filter-D">D</button></li>
+    <li><button type="button" id="filter-E">E</button></li>
+    <li><button type="button" id="filter-F">F</button></li>
+    <li><button type="button" id="filter-G">G</button></li>
+    <li><button type="button" id="filter-H">H</button></li>
+    <li><button type="button" id="filter-I">I</button></li>
+    <li><button type="button" id="filter-J">J</button></li>
+    <li><button type="button" id="filter-K">K</button></li>
+    <li><button type="button" id="filter-L">L</button></li>
+    <li><button type="button" id="filter-M">M</button></li>
+    <li><button type="button" id="filter-N">N</button></li>
+    <li><button type="button" id="filter-O">O</button></li>
+    <li><button type="button" id="filter-P">P</button></li>
+    <li><button type="button" id="filter-Q">Q</button></li>
+    <li><button type="button" id="filter-R">R</button></li>
+    <li><button type="button" id="filter-S">S</button></li>
+    <li><button type="button" id="filter-T">T</button></li>
+    <li><button type="button" id="filter-U">U</button></li>
+    <li><button type="button" id="filter-V">V</button></li>
+    <li><button type="button" id="filter-W">W</button></li>
+    <li><button type="button" id="filter-X">X</button></li>
+    <li><button type="button" id="filter-Y">Y</button></li>
+    <li><button type="button" id="filter-Z">Z</button></li>
+  </ul>
+</div>
+<div class="filters-table-container">
+  <div class="filters-container">
+    <div class="filter-content">
+      <h4>Filters</h4>
+      <i class="bx bx-filter"></i>
+      <select name="Status" id="filter-Status">
+        <option value="" hidden selected >Status</option>
+      </select>
+      <select name="location" id="filter-Location">
+        <option value="" hidden selected>Location</option>
+      </select>
+      <select name="Department" id="filter-Department">
+        <option value="" hidden selected>Department</option>
+      </select>
+    </div>
+    <div class="filters-buttons" id="filters-reset-apply-buttons" style="display: none;">
+      <button class="reset-button white-red-button" id="reset-filter" onclick="filtersReset()">Reset</button>
+      <button class="apply-button red-white-button" id="apply-filter" onclick="filterEmployeesTable()">Apply</button>
+    </div>
+  </div>
+  <div class="employees-table">
+    <div class="table-modify">
+      <div class="table-modify-delete">
+        <img src="assets/Interface/arrow-turn left -down.svg" alt="" />
+        <button class="lightred-red-button" id="emp-table-delete" onclick="deleteEmployees()">Delete</button>
+      </div>
+      <div class="table-modify-add">
+        <img src="assets/table-add.png" alt="" />
+      </div>
+    </div>
+    <div class="employees-table-data" onload="loadEmployeeData()">
+      <table id="employees-table">
+        <thead>
+          <tr>
+            <th class="checkbox">
+              <input type="checkbox" name="" id="table-header-checkbox" />
+            </th>
+            <th onclick="sortBy(1)">
+              user <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th onclick="sortBy(2)">
+              location <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th onclick="sortBy(3)">
+              Department <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th onclick="sortBy(4)">
+              Role <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th onclick="sortBy(5)">
+              Emp id <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th onclick="sortBy(6)">
+              Status <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th onclick="sortBy(7)">
+              joint DT <span><i class="bx bx-expand-alt"></i></span>
+            </th>
+            <th>...</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

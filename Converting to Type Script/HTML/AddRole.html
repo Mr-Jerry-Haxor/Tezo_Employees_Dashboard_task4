@@ -1,0 +1,58 @@
+<div class="add-role-container">
+    <h4>Create New Role</h4>
+    <div class="add-role-form">
+        <form id="add-role-form" onsubmit="addRole()">
+            <div class="form-group-2">
+                <div class="form-group">
+                    <label for="rolename">Role Name</label>
+                    <input type="text" id="rolename" placeholder="Role" />
+                    <span class="required-error" id="rolename-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" >
+                        <option value="">Select</option>
+                        <option value="HR">HR</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Product Engineering">Product Engineering</option>
+                        <option value="Finance">Finance</option>
+                        <option value="UI/UX">UI/UX</option>
+                        <option value="Sales">Sales</option>
+                    </select>
+                    <span class="required-error" id="department-span"></span>
+                </div>
+            </div>
+            <div class="form-group-text">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Description"></textarea>
+                    <span class="required-error" id="description-span"></span>
+            </div>
+            <!-- location -->
+            <div class="form-group roleinfo">
+                <label for="location">Location</label>
+                <select name="location" id="location" required>
+                    <option value="">Location</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="New York">New York</option>
+                    <option value="London">London</option>
+                </select>
+                <span class="required-error" id="location-span"></span>
+            </div>
+
+            <!-- assign employees( its a dynamic search input field , based on the input it search the employee table names and display the profile img , name and check box to select , selected checkboxes will get addedto input box ) -->
+            <div class="form-group roleinfo">
+                <label for="assign-employees">Assign Employees</label>
+                <input type="text" id="assign-employees" placeholder="Search Employees" onkeyup="searchEmployees(this.value)" />
+                <div id="employee-results"></div>
+                <input type="hidden" id="selected-employees" />
+            </div>
+
+            <div class="form-btns">
+                <button class="lightred-red-button" onclick="RolesMenu()">Cancel</button>
+                <button class="red-white-button" type="submit">Add Role</button>
+            </div>
+        </form
+
+    </div>
+</div>

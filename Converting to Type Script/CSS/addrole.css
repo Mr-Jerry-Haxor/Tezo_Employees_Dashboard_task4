@@ -1,0 +1,32 @@
+#employee-results {
+    margin-top: 10px;
+    display: none;
+    width: 400px;
+}
+
+.employee {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+}
+
+.employee img {
+    width: 30px;
+    height: 30px;
+    margin: 7px 5px;
+}
+
+.employee input[type="checkbox"] {
+    width: 20px;
+    margin:0  10px;
+}
+
+
+.roleinfo input{
+    width: 300px;
+}
+
+.roleinfo select{
+    width: 300px;
+}

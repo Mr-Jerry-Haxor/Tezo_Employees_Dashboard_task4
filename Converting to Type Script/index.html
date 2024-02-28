@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- meta tags  -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Shravan Jeripothula" />
+    <meta name="description"  content="TEZO Employees Dashboard" />
+    <meta name = "revised" content = "TEZO, 20-Feb-24" />
+
+    <!-- title and favicon -->
+    <title>TEZO Employees Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="assets/min-logo.png">
+
+    <!-- Css files -->
+    <link rel="stylesheet" href="CSS/index.css" />
+    <link rel="stylesheet" href="CSS/sidebar.css" />
+    <link rel="stylesheet" href="CSS/roles.css" />
+    <link rel="stylesheet" href="CSS/roledetails.css" />
+    <link rel="stylesheet" href="CSS/employee.css">
+    <link rel="stylesheet" href="CSS/addemployee.css">
+    <link rel="stylesheet" href="CSS/addrole.css">
+
+    <!-- Scripts -->
+    <script src="dist/index.js"></script>
+    <script src="dist/data.js"></script>
+    <script src="dist/employee.js"></script>
+    <script src="dist/addemployee.js"></script>
+
+
+    <!-- JS for Exporting table to excel format -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  </head>
+  <body onload="defaultpage()">
+    <div class="sidebar-container"></div>
+    <div class="alert-messages"></div>
+    <div class="main-container">
+      <div class="searchbar-container"></div>
+      <div class="main-content"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo closed-sidebar closed-sidebar-active">
+      <img src="assets/TezoLogo.png" alt="TezoLogo" class="logo" />
+      
+    </div>
+    <div>
+      <img src="assets/min-logo.png" alt="tezo logo" class="sidebar-closed-logo" />
+    </div>
+    <div class="toggle">
+      <a onclick="toggleSidebar()"
+        ><img src="assets/handle.png" alt="" class="toggleicon"
+      /></a>
+    </div>
+  </div>
+  <div class="sidebar-menu">
+    <p class="sidebar-title closed-sidebar closed-sidebar-active">All</p>
+    <ul class="nav-links">
+      <li>
+        <div class="sidebar-navitems">
+          <img src="assets/Horizontal nav/Dashboard.svg" alt="" />
+          <span class="nav-item-text closed-sidebar closed-sidebar-active">Dashboard</span>
+        </div>
+      </li>
+      <li>
+        <!-- make this default active -->
+        <div class="sidebar-navitems" id="employee-menu" onclick="EmployeeMenu()" >
+          <img src="assets/Horizontal nav/Employees.svg" alt="" />
+          <span class="nav-item-text closed-sidebar closed-sidebar-active">Employees</span>
+        </div>
+      </li>
+    </ul>
+    <div class="sidebar-division">
+      <p class="sidebar-title closed-sidebar closed-sidebar-active">Roles/User Management</p>
+    </div>
+    <ul class="nav-links">
+      <li>      
+        <div class="sidebar-navitems" id="roles-menu" onclick="RolesMenu()">
+          <img src="assets/Horizontal nav/Roles.svg" alt="" />
+          <span class="nav-item-text closed-sidebar closed-sidebar-active">Roles</span>
+          <i class="bx bx-chevron-right closed-sidebar closed-sidebar-active"></i>
+        </div>
+      </li>
+      <li>
+        <div class="sidebar-navitems">
+          <img src="assets/Horizontal nav/assign user.svg" alt="" />
+          <span class="nav-item-text closed-sidebar closed-sidebar-active">Access Rights</span>
+          <i class="bx bx-chevron-right closed-sidebar closed-sidebar-active"></i>
+        </div>
+      </li>
+    </ul>
+    <div class="side-menubar-foorter closed-sidebar closed-sidebar-active">
+      <div class="sidebar-update">
+        <h5>Install new update 2.3.1A</h5>
+        <p>Allow to launch the new update for the AD application</p>
+        <div class="sidebar-update-buttons">
+          <button class="lightred-red-button">Dismiss</button>
+          <button class="red-white-button">Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

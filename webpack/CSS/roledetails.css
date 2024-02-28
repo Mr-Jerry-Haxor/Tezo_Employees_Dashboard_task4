@@ -1,0 +1,20 @@
+
+.role-details-cards{
+  margin-top: 1rem;
+}
+
+.role-description p {
+  color: gray;
+  font-size: small;
+}
+
+.role-description h4 {
+  color: black;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.role-details-profile-info{
+  margin-top: 1rem;
+}
+

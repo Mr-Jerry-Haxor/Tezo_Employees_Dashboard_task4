@@ -1,0 +1,115 @@
+<div class="add-employee-container">
+    <h4 id="add-employee-title">AddEmployee</h4>
+    <div class="add-employee-form-div">
+        <form id="add-employee-form" onsubmit="addEmployee()">
+
+            <!-- flag to differentiate ADD employee or edit employee Form-->
+            <input type="hidden" id="add-or-edit-employee-flag" value="add">
+
+            <!-- upload profile picture and show preview -->
+            <div class="profile-picture">
+                <div class="profile-picture-preview">
+                    <img src="assets/defaultprofile.png" alt=""  id="uploaded-img-preview">
+                </div>
+                <div class="profile-img-upload-btn">
+                    <input type="file" accept="image/*" id="profile-picture" hidden onchange="document.getElementById('uploaded-img-preview').src = window.URL.createObjectURL(this.files[0])" />
+                    <label for="profile-picture">Upload Profile Picture</label>
+                </div>
+            <span class="profile-picture-error"></span>
+            </div>
+            <h5>Personal information</h5>
+            <div class="form-group">
+                <label for="empid">Emp No</label>
+                <input type="text" id="empid" placeholder="EMP ID" pattern="^TZ[0-9]{6}$" />
+                <span class="required-error" id="empid-span"></span>
+            </div>
+            <div class="form-group-3">
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" placeholder="First name"  pattern="[a-z,A-Z, ]+"/>
+                    <span class="required-error" id="firstname-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" placeholder="Last name" pattern="[a-z,A-Z, ]+" />
+                    <span class="required-error" id="lastname-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="text" id="dob" placeholder="dd/mm/yyyy" value=""
+                    size=10 maxlength=10 />
+                    <span class="required-error" id="dob-span"></span>
+                </div>
+            </div>
+            <div class="form-group-2">
+                <div class="form-group">
+                    <label for="email">Email Id</label>
+                    <input type="email" id="email" placeholder="Email ID" pattern="[a-zA-Z0-9._-]+\@technovert\.com$" />
+                    <span class="required-error" id="email-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" placeholder="Mobile Number" pattern="[7-9]{1}[0-9]{9}" 
+                    title="Phone number with 6-9 and remaing 9 digit with 0-9"/>
+                    <span class="required-error" id="mobile-span"></span>
+                </div>
+            </div>
+            <h5>Employee Information</h5>
+            <div class="form-group-empinfo">
+                <div class="form-group">
+                    <label for="joiningdate">Joining Date</label>
+                    <input type="text" id="joiningdate"  placeholder="dd/mm/yyyy" value=""
+                    size=10 maxlength=10  onkeydown="this.value=this.value.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'')"/>
+                    <span class="required-error" id="joiningdate-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select name="location" id="location" >
+                        <option value="">Location</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="New York">New York</option>
+                        <option value="London">London</option>
+                    </select>
+                    <span class="required-error" id="location-span"></span>
+                </div>
+            </div>
+            <div class="form-group-empinfo">
+                <div class="form-group">
+                    <label for="jobtitle">Job Title</label>
+                    <input type="text" id="jobtitle" placeholder="JOB TITLE"  />
+                    <span class="required-error" id="jobtitle-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" >
+                        <option value="">Select</option>
+                        <option value="HR">HR</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Product Engineering">Product Engineering</option>
+                        <option value="Finance">Finance</option>
+                        <option value="UI/UX">UI/UX</option>
+                        <option value="Sales">Sales</option>
+                    </select>
+                    <span class="required-error" id="department-span"></span>
+                </div>
+            </div>
+            <div class="form-group-empinfo">
+                <div class="form-group">
+                    <label for="assignmanager">Assign Manager</label>
+                    <input type="text" id="assignmanager" placeholder="Assign Manager"  />
+                    <span class="required-error" id="assignmanager-span"></span>
+                </div>
+                <div class="form-group">
+                    <label for="assignproject">Assign Project</label>
+                    <input type="text" id="assignproject" placeholder="Assign project"  />
+                    <span class="required-error" id="assignproject-span"></span>
+                </div>
+            </div>
+            <div class="form-btns">
+                <button class="lightred-red-button" onclick="EmployeeMenu()">Cancel</button>
+                <button class="red-white-button" type="submit" id="form-submit">Add Employee</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="../JavaScript/addemployee.js"></script>
