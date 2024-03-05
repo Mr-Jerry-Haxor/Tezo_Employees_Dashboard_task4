@@ -1,0 +1,25 @@
+{
+    "name": "bundling-ts-files",
+    "version": "1.0.0",
+    "description": "bundling of typescript files using webpack",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "lite-server",
+        "build": "webpack"
+    },
+    "keywords": [
+        "typescript",
+        "course"
+    ],
+    "author": "Shravan Jeripothula",
+    "license": "ISC",
+    "devDependencies": {
+        "lite-server": "2.5.4",
+        "ts-loader": "9.2.3",
+        "typescript": "4.3.5",
+        "webpack": "5.41.1",
+        "webpack-cli": "4.7.2",
+        "webpack-dev-server": "3.11.2"
+    }
+}
