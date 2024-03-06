@@ -1,19 +1,21 @@
-import { indexclass } from "./index.js";
-
+import {  CustomAlertclass} from "./index";
+import { employeeclass } from "./employee";
 
 export class addemployeeclass{
-    indexobj: indexclass;
+    employeeclassobj: employeeclass;
+    alertobj: CustomAlertclass;
 
     constructor() {
-        this.indexobj = new indexclass();
+        this.employeeclassobj = new employeeclass();
+        this.alertobj = new CustomAlertclass();
 
     }
 
-     getFieldValue(fieldId: string): string {
+    getFieldValue(fieldId: string): string {
         return (document.getElementById(fieldId) as HTMLInputElement).value;
     }
 
-     addEmployee(): void {
+    addEmployee(): void {
         const fields: string[] = ['empid', 'firstname', 'lastname', 'dob', 'email', 'mobile', 'joiningdate', 'location', 'department'];
         let isValid: boolean = true;
         let employee: any = {};
@@ -46,7 +48,7 @@ export class addemployeeclass{
             employees.forEach((employee: any) => {
                 if (employee.empid === empid && AddOrEditFlag === "add") {
 
-                    this.indexobj.CustomAlert('error', 'Employee ID already exists');
+                    this.alertobj.CustomAlert('error', 'Employee ID already exists');
                     exists = true;
                     return false;
                 }
@@ -74,8 +76,8 @@ export class addemployeeclass{
                 localdata.Employees.push(employee);
                 localStorage.setItem("data", JSON.stringify(localdata));
 
-                this.indexobj.EmployeeMenu();
-                this.indexobj.CustomAlert('success', 'Employee added successfully');
+                this.employeeclassobj.EmployeeMenu();
+                this.alertobj.CustomAlert('success', 'Employee added successfully');
             } else if (AddOrEditFlag === "edit" && isValid) {
                 let employee: any = employees.find((emp: any) => emp.empid === empid);
                 Object.assign(employee, {
@@ -97,15 +99,20 @@ export class addemployeeclass{
 
                 localStorage.setItem("data", JSON.stringify(data));
 
-                this.indexobj.EmployeeMenu();
-                this.indexobj.CustomAlert('success', 'Employee updated successfully');
+                this.employeeclassobj.EmployeeMenu();
+                this.alertobj.CustomAlert('success', 'Employee updated successfully');
             }
         } else {
             console.error('Data or Employees is null');
         }
     }
 
-     addEmployeeEventListeners(): void {
+}
+
+
+
+export class addEmployeeEventListenersClass {
+    addEmployeeEventListeners(): void {
         const fields: string[] = ['empid', 'firstname', 'lastname', 'dob', 'email', 'mobile', 'joiningdate', 'location', 'department'];
         const fieldsinfo: { [key: string]: string } = {
             'empid': 'Invalid Format, Only TZ123456 allowed',
@@ -169,7 +176,7 @@ export class addemployeeclass{
 
 
 
-     addemployeeFormSubmitValidation(): void {
+    addemployeeFormSubmitValidation(): void {
         const form: HTMLFormElement = document.getElementById('add-employee-form') as HTMLFormElement;
 
         form.addEventListener('submit', event => {

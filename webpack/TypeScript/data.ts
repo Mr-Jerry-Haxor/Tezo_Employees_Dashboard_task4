@@ -1,16 +1,15 @@
-import { indexclass } from './index.js';
+import { indexclass , CustomAlertclass } from './index';
 
 
-export class dataclass{
-    indexobj: indexclass;
-    
+
+export class Loaddataclass{
 
     emp_filter_sort_data: any[];
 
     constructor() {
         this.emp_filter_sort_data = [];
-        this.indexobj = new indexclass();
     }
+
 
     loadEmployeeData(): void {
         fetch("data.json")
@@ -28,7 +27,6 @@ export class dataclass{
             })
             .catch((error: Error) => console.error('Error:', error));
     }
-
 
     LoadEmployeeDataByArray(employeeArray: any[]): void {
 
@@ -108,8 +106,8 @@ export class dataclass{
             buttonmore.className = "button-more";
             buttonmore.id = employee.empid + "_more";
             buttonmore.textContent = "...";
-            let empid: string = employee.empid + "_more";
-            buttonmore.setAttribute("onclick", "viewmore('" + empid + "')");
+            // let empid: string = employee.empid + "_more";
+            // buttonmore.setAttribute("onclick", "viewmore('" + empid + "')");
             cellMore.appendChild(buttonmore);
             let divMore: HTMLDivElement = document.createElement('div');
             divMore.className = "emp-table-more";
@@ -141,6 +139,19 @@ export class dataclass{
             t.tBodies[0].appendChild(r)
         });
     }
+}
+
+
+export class dataclass{
+    alertobj: CustomAlertclass;
+    
+
+    constructor() {
+        this.alertobj = new CustomAlertclass();
+    }
+
+
+    
 
 
     export_options(): void {
@@ -187,9 +198,9 @@ export class dataclass{
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            this.indexobj.CustomAlert('success', filename + '\n has begin downloading');
+            this.alertobj.CustomAlert('success', filename + '\n has begin downloading');
         } catch (error) {
-            this.indexobj.CustomAlert('error', (error as Error).message);
+            this.alertobj.CustomAlert('error', (error as Error).message);
         }
     }
 
@@ -241,9 +252,9 @@ export class dataclass{
     //         document.body.appendChild(link);
     //         link.click();
     //         document.body.removeChild(link);
-    //         this.indexobj.CustomAlert('success', filename + '\nhas begin downloading');
+    //         this.alertobj.CustomAlert('success', filename + '\nhas begin downloading');
     //     } catch (error) {
-    //         this.indexobj.CustomAlert('error', (error as Error).message);
+    //         this.alertobj.CustomAlert('error', (error as Error).message);
     //     }
     // }
 

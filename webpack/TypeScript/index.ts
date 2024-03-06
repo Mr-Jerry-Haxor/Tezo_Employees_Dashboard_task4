@@ -1,17 +1,18 @@
-import { dataclass } from "./data.js";
-import { employeeclass } from "./employee.js";
-import { addemployeeclass } from "./addemployee.js";
+import {  Loaddataclass } from "./data";
+import { employeeclass } from "./employee";
+import { addEmployeeEventListenersClass } from "./addemployee";
 
 
 export class indexclass{
     employeeclassobj: employeeclass;
-    addemployeeclassobj: addemployeeclass;
-    dataobj: dataclass;
+    addemployeeclassobj: addEmployeeEventListenersClass;
+    dataobj: Loaddataclass;
+
 
     constructor() {
-        this.addemployeeclassobj = new addemployeeclass();
+        this.addemployeeclassobj = new addEmployeeEventListenersClass();
         this.employeeclassobj = new employeeclass();
-        this.dataobj = new dataclass();
+        this.dataobj = new Loaddataclass();
     }
 
 
@@ -50,7 +51,7 @@ export class indexclass{
      NavbarLoad(): void {
         const sidebarcontainer: HTMLElement | null = document.querySelector(".sidebar-container");
         fetch(
-            "HTML/sidebar.html"
+            "Components/sidebar.html"
         )
             .then((res: Response) => res.text())
             .then((data: string) => {
@@ -64,7 +65,7 @@ export class indexclass{
 
         const searchbar: HTMLElement | null = document.querySelector(".searchbar-container");
         fetch(
-            "HTML/searchbar.html"
+            "Components/searchbar.html"
         )
             .then((res: Response) => res.text())
             .then((data: string) => {
@@ -76,45 +77,14 @@ export class indexclass{
     }
 
 
-    // employee table page
-     EmployeeMenu(): void {
-        const mainContainer: HTMLElement | null = document.querySelector(".main-content");
-        fetch(
-            "HTML/employee.html"
-        )
-            .then((res: Response) => res.text())
-            .then((data: string) => {
-                if (mainContainer) {
-                    mainContainer.innerHTML = data;
-                }
-            })
-            .then(() => {
-                this.dataobj.loadEmployeeData();
-                this.employeeclassobj.Filters();
-                this.employeeclassobj.checkboxes();
-            })
-            .then(() => {
-                setTimeout(() => {
-                    this.employeeclassobj.checkboxIsChecked();
-                    this.employeeclassobj.LoadFilterOptions();
-                }, 1000);
-            })
-            .then(() => {
-                const employeeMenu: HTMLElement | null = document.querySelector("#employee-menu");
-                employeeMenu?.classList.add("menuactive");
-                // remove active class from other menu
-                const rolesMenu: HTMLElement | null = document.querySelector("#roles-menu");
-                rolesMenu?.classList.remove("menuactive");
-            })
-            .catch((error: Error) => console.error('Error:', error));
-    }
+    
 
 
     //roles menu page
      RolesMenu(): void {
         const mainContainer: HTMLElement | null = document.querySelector(".main-content");
         fetch(
-            "HTML/roles.html"
+            "Components/roles.html"
         )
             .then((res: Response) => res.text())
             .then((data: string) => {
@@ -138,7 +108,7 @@ export class indexclass{
     // role details page
      RoleDetails(): void {
         const mainContainer: HTMLElement | null = document.querySelector(".main-content");
-        fetch("HTML/roledetails.html")
+        fetch("Components/roledetails.html")
             .then((res: Response) => res.text())
             .then((data: string) => {
                 if (mainContainer) {
@@ -159,7 +129,7 @@ export class indexclass{
     // Add employee page
      addemployeepage(): void {
         const mainContainer: HTMLElement | null = document.querySelector(".main-content");
-        fetch("HTML/AddEmployee.html")
+        fetch("Components/AddEmployee.html")
             .then((res: Response) => res.text())
             .then((data: string) => {
                 if (mainContainer) {
@@ -183,7 +153,7 @@ export class indexclass{
     // add role page
      addrolepage(): void {
         const mainContainer: HTMLElement | null = document.querySelector(".main-content");
-        fetch("HTML/AddRole.html")
+        fetch("Components/AddRole.html")
             .then((res: Response) => res.text())
             .then((data: string) => {
                 if (mainContainer) {
@@ -200,15 +170,35 @@ export class indexclass{
     }
 
 
+}
 
-    // default  employee page load
-     defaultpage(): void {
-        this.NavbarLoad();
-        this.EmployeeMenu();
+
+export class defualtpageclass {
+
+    employeeclassobj: employeeclass;
+    indexobj: indexclass;
+
+    constructor() {
+        this.employeeclassobj = new employeeclass();
+        this.indexobj = new indexclass();
+
+        // Call the defaultpage function on load
+        this.defaultpage();
     }
 
+    // default  employee page load
+    defaultpage(): void {
+        this.indexobj.NavbarLoad();
+        this.employeeclassobj.EmployeeMenu();
+    }
+}
 
 
+
+
+
+
+export class CustomAlertclass{
     // toaster messages for success, warning, info, and error types
     CustomAlert(status: string, message: string): void {
         const alertContainer: HTMLElement | null = document.querySelector('.alert-messages');
@@ -235,11 +225,7 @@ export class indexclass{
             document.querySelector('.alert-messages')?.classList.remove('show');
         }, 5000);
     }
-
-
-
 }
 
-
 // creating object for index class
-const indexobj1 = new indexclass();
+const page = new defualtpageclass();

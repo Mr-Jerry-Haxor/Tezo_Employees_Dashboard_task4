@@ -1,23 +1,147 @@
-import { dataclass } from "./data.js";
-import { addemployeeclass } from "./addemployee.js";
-import { indexclass } from "./index.js";
+import { dataclass, Loaddataclass } from "./data";
+import { addEmployeeEventListenersClass } from "./addemployee";
+import {  CustomAlertclass  } from "./index";
+
+
 
 export class employeeclass{
-    indexobj: indexclass;
-    addemployeeobj: addemployeeclass;
+    addemployeeobj: addEmployeeEventListenersClass;
     dataobj: dataclass;
+    alertobj: CustomAlertclass;
+    loaddataobj: Loaddataclass;
+
 
     selectedLetters: string[];
     cPrev: number;
 
     constructor() {
-        this.indexobj = new indexclass();
-        this.addemployeeobj = new addemployeeclass();
+        this.addemployeeobj = new addEmployeeEventListenersClass();
         this.dataobj = new dataclass();
+        this.alertobj = new CustomAlertclass();
+        this.loaddataobj = new Loaddataclass();
 
         this.selectedLetters = []; // initialize it in the constructor
         this.cPrev = -1;
     }
+
+
+    // employee table page
+    EmployeeMenu(): void {
+        const mainContainer: HTMLElement | null = document.querySelector(".main-content");
+        fetch(
+            "Components/employee.html"
+        )
+            .then((res: Response) => res.text())
+            .then((data: string) => {
+                if (mainContainer) {
+                    mainContainer.innerHTML = data;
+                }
+            })
+            .then(() => {
+                this.loaddataobj.loadEmployeeData();
+            })
+            .then(() => {
+                setTimeout(() => {
+
+                    this.EmployeeTableEventlisteners();
+
+                    // Add event listener to the filter apply and reset
+                    const applyFilter = document.querySelector('#apply-filter') as HTMLElement | null;
+                    applyFilter?.addEventListener('click', () => {
+                        this.filterEmployeesTable();
+                    });
+
+                    const resetFilter = document.querySelector('#reset-filter') as HTMLElement | null;
+                    resetFilter?.addEventListener('click', () => {
+                        this.filterEmployeesTable();
+                        this.filterTableByFirstLetters(this.selectedLetters);
+                        this.resetFilters();
+                    });
+
+                    // Get the export button and add a click event listener
+                    const exportButton = document.querySelector('#export_options') as HTMLElement | null;
+                    exportButton?.addEventListener('click', () => {
+                        this.dataobj.export_options();
+                    });
+
+                    // Get the export options buttons and add click event listeners
+                    // const exportAsXlsxButton = document.querySelector('#export_to_xlsx');
+                    // exportAsXlsxButton.addEventListener('click', () => {
+                    //     this.dataobj.download_table_as_xlsx('employees-table');
+                    // });
+
+                    const exportAsCsvButton = document.querySelector('#export_to_csv')  as HTMLElement | null;
+                    exportAsCsvButton?.addEventListener('click', () => {
+                        this.dataobj.download_table_as_csv('employees-table');
+                    });
+
+                }, 1000);
+            })
+
+            .then(() => {
+                const employeeMenu: HTMLElement | null = document.querySelector("#employee-menu");
+                employeeMenu?.classList.add("menuactive");
+                // remove active class from other menu
+                const rolesMenu: HTMLElement | null = document.querySelector("#roles-menu");
+                rolesMenu?.classList.remove("menuactive");
+            })
+            .catch((error: Error) => console.error('Error:', error));
+    }
+
+
+
+    EmployeeTableEventlisteners(): void {
+
+
+        this.Filters();
+        this.checkboxes();
+
+        this.checkboxIsChecked();
+        this.LoadFilterOptions();
+        // Add event listener to the th elements for sorting the table by column
+        const tableHeaders = document.querySelectorAll('#employees-table th');
+        tableHeaders.forEach((header, index) => {
+            if (index === 0) return;    // Skip the first th because it's for checkboxes
+            header.addEventListener('click', () => {   // Add a click event listener to the th element
+                this.sortBy(index);   // Call the sortBy function with the index as argument
+            });
+        });
+
+        // Add event listener to the checkboxes delete
+        const deleteCheckbox = document.querySelector('#emp-table-delete') as HTMLElement | null;
+        deleteCheckbox?.addEventListener('click', () => {
+            this.deleteEmployees();
+        });
+
+        // Add event listener to the view more button
+        const viewmorebutton = document.querySelectorAll('.button-more');
+        viewmorebutton.forEach((button) => {
+            button.addEventListener('click', () => {
+                const empid = button.id;
+                this.viewmore(empid);  // call the viewMore function with id as argument
+            });
+        });
+
+        // Add event listener to the delete button
+        const deletebutton = document.querySelectorAll('.button-delete');
+        deletebutton.forEach((button) => {
+            button.addEventListener('click', () => {
+                const empid = button.id;
+                this.deleteEmployee(empid);  // call the deleteEmployee function with id as argument
+            });
+        });
+
+        // Add event listener to the edit button
+        const editbutton = document.querySelectorAll('.button-edit');
+        editbutton.forEach((button) => {
+            button.addEventListener('click', () => {
+                const empid = button.id;
+                this.EditEmployeeDetails(empid);  // call the editEmployee function with id as argument
+            });
+        });
+    }
+
+
 
     Filters(): void {
         (document.querySelectorAll('.table-filters-list button') as NodeListOf<HTMLButtonElement>).forEach((button: HTMLButtonElement) => {
@@ -44,6 +168,7 @@ export class employeeclass{
             });
         });
     }
+
 
     resetFilters(): void {
         const statusSelect: HTMLSelectElement = document.getElementById('filter-Status') as HTMLSelectElement;
@@ -84,7 +209,7 @@ export class employeeclass{
         } else {
             emp_filter_sort_data = employees;
         }
-        this.dataobj.LoadEmployeeDataByArray(emp_filter_sort_data);
+        this.loaddataobj.LoadEmployeeDataByArray(emp_filter_sort_data);
         this.resetFilters();
     }
 
@@ -127,20 +252,7 @@ export class employeeclass{
         });
     }
 
-    filtersReset(): void {
-        const statusSelect: HTMLSelectElement = document.getElementById('filter-Status') as HTMLSelectElement;
-        const locationSelect: HTMLSelectElement = document.getElementById('filter-Location') as HTMLSelectElement;
-        const departmentSelect: HTMLSelectElement = document.getElementById('filter-Department') as HTMLSelectElement;
-        statusSelect.selectedIndex = 0;
-        locationSelect.selectedIndex = 0;
-        departmentSelect.selectedIndex = 0;
-        this.filterEmployeesTable();
-        this.filterTableByFirstLetters(this.selectedLetters);
-        if (statusSelect.value == "" && locationSelect.value == "" && departmentSelect.value == "") {
-            const filterinactive: HTMLElement = document.getElementById('filters-reset-apply-buttons')!;
-            filterinactive.style.display = "none";
-        }
-    }
+    
 
     filterEmployeesTable(): void {
         const statusSelect: string = (document.getElementById('filter-Status') as HTMLSelectElement).value;
@@ -157,7 +269,9 @@ export class employeeclass{
                 const statusCell: HTMLElement = row.querySelector('td:nth-child(7)')!;
                 const locationCell: HTMLElement = row.querySelector('td:nth-child(3)')!;
                 const departmentCell: HTMLElement = row.querySelector('td:nth-child(4)')!;
-                if ((statusSelect !== "" && statusCell.textContent !== statusSelect) || (locationSelect !== "" && locationCell.textContent !== locationSelect) || (departmentSelect !== "" && departmentCell.textContent !== departmentSelect)) {
+                if ((statusSelect !== "" && statusCell.textContent !== statusSelect) || 
+                (locationSelect !== "" && locationCell.textContent !== locationSelect) || 
+                (departmentSelect !== "" && departmentCell.textContent !== departmentSelect)) {
                     row.style.display = 'none';
                 } else {
                     row.style.display = '';
@@ -206,7 +320,7 @@ export class employeeclass{
         const rows: number = table.rows.length;
         const columns: number = table.rows[0].cells.length;
         const arrTable: string[][] = [];
-
+        console.log(c);
         for (let ro = 0; ro < rows; ro++) {
             const row: HTMLTableRowElement = table.rows[ro];
             if (row.style.display !== 'none') {
@@ -219,6 +333,16 @@ export class employeeclass{
         }
 
         const th: string[] = arrTable.shift() as string[];
+
+        if (this.cPrev === c) {
+            arrTable.reverse();
+        } else {
+            arrTable.sort((a: string[], b: string[]) => {
+                const valueA = a[c];
+                const valueB = b[c];
+                return valueA.localeCompare(valueB);
+            });
+        }
 
         this.cPrev = c;
 
@@ -235,6 +359,7 @@ export class employeeclass{
                 }
             }
         }
+        this.EmployeeTableEventlisteners();
     }
 
     deleteEmployees(): void {
@@ -270,8 +395,8 @@ export class employeeclass{
             data.Employees = employees;
 
             localStorage.setItem("data", JSON.stringify(data));
-            this.indexobj.EmployeeMenu();
-            this.indexobj.CustomAlert("success", "Selected employees deleted successfully.");
+            this.EmployeeMenu();
+            this.alertobj.CustomAlert("success", "Selected employees deleted successfully.");
         } catch (error) {
             console.error("An error occurred while deleting employees: ", error);
         }
@@ -287,7 +412,7 @@ export class employeeclass{
             const data: any = JSON.parse(localStorage.getItem("data") || "{}");
 
             if (!data || !data.Employees) {
-                this.indexobj.CustomAlert("error", "No employee data found in local storage.");
+                this.alertobj.CustomAlert("error", "No employee data found in local storage.");
                 return;
             }
 
@@ -296,10 +421,10 @@ export class employeeclass{
             data.Employees = employees;
 
             localStorage.setItem("data", JSON.stringify(data));
-            this.indexobj.EmployeeMenu();
-            this.indexobj.CustomAlert("success", "Selected employee deleted successfully.");
+            this.EmployeeMenu();
+            this.alertobj.CustomAlert("success", "Selected employee deleted successfully.");
         } catch (error) {
-            this.indexobj.CustomAlert("error", "An error occurred while deleting employees: " + error);
+            this.alertobj.CustomAlert("error", "An error occurred while deleting employees: " + error);
         }
     }
 
@@ -322,7 +447,7 @@ export class employeeclass{
     EditEmployeeDetails(empid: string): void {
         const data: any = JSON.parse(localStorage.getItem("data") || "{}");
         if (!data || !data.Employees) {
-            this.indexobj.CustomAlert("error", "No employee data found in local storage.");
+            this.alertobj.CustomAlert("error", "No employee data found in local storage.");
             return;
         }
 
